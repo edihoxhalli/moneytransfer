@@ -20,8 +20,6 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    DataSource dataSource;
 
 
     @Autowired
@@ -40,9 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/").permitAll()
+        http
+                .authorizeRequests().antMatchers("/user").permitAll()
                 .and()
-                .authorizeRequests().antMatchers("/user/**").permitAll()
+                .authorizeRequests().antMatchers("/**").authenticated()
                 .and()
                 .authorizeRequests().antMatchers("/swagger-ui.html").permitAll()
                 .and()

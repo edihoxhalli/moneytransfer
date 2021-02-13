@@ -18,4 +18,16 @@ public class Account {
             throw new BalanceLessThanZeroException("Account balance cannot be less than 0!");
         }
     }
+
+    Account addAmount(MoneyAmount amount){
+        BigDecimal newAmount = this.balance.getAmount().add(amount.getAmount());
+        this.balance.setAmount(newAmount);
+        return this;
+    }
+
+    Account subtractAmount(MoneyAmount amount){
+        BigDecimal newAmount = this.balance.getAmount().subtract(amount.getAmount());
+        this.balance.setAmount(newAmount);
+        return this;
+    }
 }

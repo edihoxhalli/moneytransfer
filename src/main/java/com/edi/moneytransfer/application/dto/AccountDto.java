@@ -8,4 +8,5 @@ import lombok.Setter;
 public class AccountDto {
     private Long id;
     private Double balance;
+    private UserDto userDto;
 }

@@ -28,7 +28,7 @@ public class User implements Serializable {
     private Set<Authority> authorities;
     private boolean enabled = true;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Account account;
 
 

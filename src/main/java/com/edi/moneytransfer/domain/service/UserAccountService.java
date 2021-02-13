@@ -1,9 +1,9 @@
 package com.edi.moneytransfer.domain.service;
 
-import com.edi.moneytransfer.application.dto.UserDto;
+import com.edi.moneytransfer.domain.model.MoneyAmount;
+import com.edi.moneytransfer.domain.model.MoneyTransfer;
 import com.edi.moneytransfer.domain.model.UserAccountAggregate;
 
 public interface UserAccountService {
-    UserDto createUserAccountAggregate(UserDto userDto);
-    UserAccountAggregate getUserAccountAggregate();
+    MoneyTransfer transferMoney(UserAccountAggregate sender, UserAccountAggregate recipient, MoneyAmount amount);
 }
