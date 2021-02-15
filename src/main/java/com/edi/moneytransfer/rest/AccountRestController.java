@@ -4,7 +4,6 @@ import com.edi.moneytransfer.application.dto.AccountDto;
 import com.edi.moneytransfer.application.service.AccountService;
 import com.edi.moneytransfer.domain.model.MoneyAmount;
 import lombok.AllArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,6 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(path = "/account")
 @AllArgsConstructor
-@Validated
 public class AccountRestController {
 
     private final AccountService accountService;

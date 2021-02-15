@@ -2,14 +2,18 @@ package com.edi.moneytransfer.application.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class TransferDto {
     private Long id;
-    @NonNull
+    @NotNull(message = "recipientUsername must not be empty!")
     private String recipientUsername;
-    @NonNull
+    @NotNull(message = "amount must not be empty!")
+    @Positive(message = "amount must be positive!")
     private Double amount;
 }

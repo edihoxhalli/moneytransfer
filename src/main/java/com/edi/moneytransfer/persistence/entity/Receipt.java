@@ -1,22 +1,25 @@
 package com.edi.moneytransfer.persistence.entity;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Getter
 @Setter
-public class Transfer {
+public class Receipt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Account sender;
-    @ManyToOne
-    private Account recipient;
     private BigDecimal amount;
+
+    @ManyToOne
+    private Account account;
+    private Type type;
+
+    public enum Type{
+        CASH_IN, CASH_OUT
+    }
 }

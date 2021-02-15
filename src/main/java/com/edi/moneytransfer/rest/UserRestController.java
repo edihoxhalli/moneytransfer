@@ -4,15 +4,13 @@ import com.edi.moneytransfer.application.dto.UserDto;
 import com.edi.moneytransfer.application.mapper.UserMapper;
 import com.edi.moneytransfer.application.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/user")
 @AllArgsConstructor
-@Validated
+@RequestMapping(path = "/user")
 public class UserRestController {
 
     private final UserService userService;
@@ -24,7 +22,7 @@ public class UserRestController {
     }
 
     @PutMapping
-    public String login(@RequestBody UserDto userDto){
+    public String login(@RequestBody @Valid UserDto userDto){
         userService.login(userDto);
         return "Login successful!";
     }

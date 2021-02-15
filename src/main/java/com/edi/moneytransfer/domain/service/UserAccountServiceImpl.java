@@ -1,6 +1,7 @@
 package com.edi.moneytransfer.domain.service;
 
 import com.edi.moneytransfer.application.dto.UserDto;
+import com.edi.moneytransfer.domain.exception.TransferToSelfException;
 import com.edi.moneytransfer.domain.model.MoneyAmount;
 import com.edi.moneytransfer.domain.model.MoneyTransfer;
 import com.edi.moneytransfer.domain.model.UserAccountAggregate;
@@ -20,6 +21,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public MoneyTransfer transferMoney(UserAccountAggregate sender, UserAccountAggregate recipient, MoneyAmount amount) {
+        if(sender.getUsername().equals(recipient.getUsername()))
+            throw new TransferToSelfException("Cannot transfer money to self!");
         sender.decreaseAccountBalance(amount);
         recipient.increaseAccountBalance(amount);
         return new MoneyTransfer(sender, recipient, amount);

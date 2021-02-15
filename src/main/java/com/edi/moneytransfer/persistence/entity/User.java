@@ -19,7 +19,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1234L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
@@ -28,7 +28,7 @@ public class User implements Serializable {
     private Set<Authority> authorities;
     private boolean enabled = true;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private Account account;
 
 

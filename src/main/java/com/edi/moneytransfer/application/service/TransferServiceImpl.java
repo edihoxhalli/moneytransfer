@@ -40,9 +40,7 @@ public class TransferServiceImpl implements TransferService {
                 .username(currentUser.getUsername())
                 .accountId(currentUser.getAccount().getId())
                 .balance(
-                        new MoneyAmount(
-                                new BigDecimal(currentUser.getAccount().getBalance())
-                        )
+                        new MoneyAmount(currentUser.getAccount().getBalance())
                 )
                 .build();
 
@@ -54,9 +52,7 @@ public class TransferServiceImpl implements TransferService {
                 .username(recipientUser.getUsername())
                 .accountId(recipientAccount.getId())
                 .balance(
-                        new MoneyAmount(
-                                new BigDecimal(recipientAccount.getBalance())
-                        )
+                        new MoneyAmount(recipientAccount.getBalance())
                 )
                 .build();
 
@@ -68,7 +64,7 @@ public class TransferServiceImpl implements TransferService {
         recipientAccount = accountRepository.save(recipientAccount);
 
         Transfer transfer = new Transfer();
-        transfer.setAmount(amount.doubleValue());
+        transfer.setAmount(amount);
         transfer.setRecipient(recipientAccount);
         transfer.setSender(senderAccount);
         transferRepository.save(transfer);

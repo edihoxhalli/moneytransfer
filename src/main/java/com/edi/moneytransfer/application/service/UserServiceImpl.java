@@ -20,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -36,8 +37,9 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.toEntity(userDto);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Account account = new Account();
-        account.setBalance(0D);
+        account.setBalance(BigDecimal.ZERO);
         user.setAccount(account);
+        account.setUser(user);
         Authority authority = new Authority();
         authority.setAuthority("USER");
         Set<Authority> authorities = new HashSet<>();
