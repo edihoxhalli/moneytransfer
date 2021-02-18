@@ -28,7 +28,7 @@ public class TransferRestController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "User with username: "+transferDto.getRecipientUsername()+ " does not exist!");
 
-        return transferService.transferMoney(recipientUser, new BigDecimal(transferDto.getAmount()));
+        return transferService.transferMoney(recipientUser, transferDto.getAmount());
     }
 
 }

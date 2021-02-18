@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,5 +16,5 @@ public class TransferDto {
     private String recipientUsername;
     @NotNull(message = "amount must not be empty!")
     @Positive(message = "amount must be positive!")
-    private Double amount;
+    private BigDecimal amount;
 }

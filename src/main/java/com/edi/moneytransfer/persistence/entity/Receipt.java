@@ -8,11 +8,12 @@ import java.math.BigDecimal;
 
 @Entity
 @Setter
-public class Receipt {
+public class Receipt extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(scale = 2)
     private BigDecimal amount;
 
     @ManyToOne

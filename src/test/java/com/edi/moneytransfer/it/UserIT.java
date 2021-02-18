@@ -1,4 +1,4 @@
-package com.edi.moneytransfer.rest;
+package com.edi.moneytransfer.it;
 
 import com.edi.moneytransfer.application.dto.UserDto;
 import com.edi.moneytransfer.persistence.entity.User;
@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import javax.servlet.http.HttpSession;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -28,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class UserRestControllerTest {
+public class UserIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -117,5 +118,17 @@ public class UserRestControllerTest {
 
         assertThat(response.getUsername().equals(userDto.getUsername()));
 
+    }
+
+    @Test
+    public void getCurrentUserReturnsNullIfNotAuthenticated_Test() throws Exception{
+        String response = mockMvc
+                            .perform(get("/user")
+                                    .contentType(MediaType.APPLICATION_JSON))
+                            .andExpect(status().is2xxSuccessful())
+                            .andReturn()
+                            .getRequest()
+                            .getContentAsString();
+        assertEquals(null, response);
     }
 }

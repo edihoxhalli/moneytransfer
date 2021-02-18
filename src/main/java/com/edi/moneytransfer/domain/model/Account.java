@@ -19,15 +19,13 @@ public class Account {
         }
     }
 
-    Account addAmount(MoneyAmount amount){
+    void addAmount(MoneyAmount amount){
         BigDecimal newAmount = this.balance.getAmount().add(amount.getAmount());
         this.balance.setAmount(newAmount);
-        return this;
     }
 
-    Account subtractAmount(MoneyAmount amount){
+    void subtractAmount(MoneyAmount amount){
         BigDecimal newAmount = this.balance.getAmount().subtract(amount.getAmount());
         this.balance.setAmount(newAmount);
-        return this;
     }
 }

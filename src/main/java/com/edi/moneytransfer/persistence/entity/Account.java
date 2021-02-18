@@ -13,10 +13,11 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class Account extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(scale = 2)
     private BigDecimal balance;
 
     @OneToOne(fetch = FetchType.EAGER)
