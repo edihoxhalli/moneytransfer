@@ -105,7 +105,7 @@ public class AccountIT {
     }
 
     @Test
-    @DisplayName("Returns forbidden status code when requested without authenticated mock user1")
+    @DisplayName("Returns forbidden status code when requested without authenticated mock user")
     public void topUpAccountWithoutMockUser_ReturnsForbidden_Test() throws Exception{
         BigDecimal balance = new BigDecimal(1000);
         MoneyAmount amount = new MoneyAmount(balance);

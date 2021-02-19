@@ -5,6 +5,7 @@ import com.edi.moneytransfer.persistence.entity.User;
 import com.edi.moneytransfer.persistence.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class UserIT {
     private UserRepository userRepository;
 
     @Test
+    @DisplayName("User successfully created")
     public void createUserTest() throws Exception {
         UserDto userDto = new UserDto(null, "username", "password", null);
 
@@ -57,14 +59,15 @@ public class UserIT {
 
 
         User userStored = userRepository.findByUsername(userDto.getUsername());
-        assertThat(userStored.getId().equals(response.getId()));
-        assertThat(userStored.getPassword().equals(response.getPassword()));
-        assertThat(userStored.getUsername().equals(response.getUsername()));
-        assertThat(userStored.getAccount().getId().equals(response.getAccount().getId()));
+        assertEquals(response.getId(), userStored.getId());
+        assertEquals(response.getPassword(), userStored.getPassword());
+        assertEquals(response.getUsername(), userStored.getUsername());
+        assertEquals(response.getAccount().getId(), userStored.getAccount().getId());
 
     }
 
     @Test
+    @DisplayName("User creation fails if password is empty")
     public void createUserWithEmptyPasswordFailsTest() throws Exception {
         UserDto userDto = new UserDto(null, "username", "", null);
         mockMvc
@@ -73,11 +76,12 @@ public class UserIT {
                     .content(mapper.writeValueAsString(userDto)))
             .andExpect(status().is4xxClientError());
 
-        assertThat(userRepository.findByUsername(userDto.getUsername()) == null);
+        assertEquals(null, userRepository.findByUsername(userDto.getUsername()));
 
     }
 
     @Test
+    @DisplayName("User can login successfully")
     public void userLoginSuccessfulTest() throws Exception {
         UserDto userDto = new UserDto(null, "username", "password", null);
         mockMvc
@@ -116,11 +120,12 @@ public class UserIT {
                                 .getContentAsString(),
                         UserDto.class);
 
-        assertThat(response.getUsername().equals(userDto.getUsername()));
+        assertEquals(userDto.getUsername(), response.getUsername());
 
     }
 
     @Test
+    @DisplayName("Get current user returns null if not authenticated")
     public void getCurrentUserReturnsNullIfNotAuthenticated_Test() throws Exception{
         String response = mockMvc
                             .perform(get("/user")
